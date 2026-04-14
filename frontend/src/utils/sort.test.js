@@ -138,4 +138,48 @@ describe('testSort', () => {
     expect(result[3]).toEqual({ name: "video2.mp4", metadata: { duration: 240.75 } });
   });
 
+  it('sort items by type correctly (ascending)', () => {
+    const input = [
+      { name: "movie.mp4", type: "video/mp4" },
+      { name: "picture.jpg", type: "image/jpeg" },
+      { name: "song.mp3", type: "audio/mpeg" },
+      { name: "notes.txt", type: "text/plain" },
+      { name: "archive.zip", type: "application/zip" },
+      { name: "folder", type: "directory" },
+    ];
+
+    const expected = [
+      { name: "archive.zip", type: "application/zip" },
+      { name: "song.mp3", type: "audio/mpeg" },
+      { name: "folder", type: "directory" },
+      { name: "picture.jpg", type: "image/jpeg" },
+      { name: "notes.txt", type: "text/plain" },
+      { name: "movie.mp4", type: "video/mp4" },
+    ];
+
+    expect(sortedItems(input, "type", true)).toEqual(expected);
+  });
+
+  it('sort items by type correctly (descending)', () => {
+    const input = [
+      { name: "movie.mp4", type: "video/mp4" },
+      { name: "picture.jpg", type: "image/jpeg" },
+      { name: "song.mp3", type: "audio/mpeg" },
+      { name: "notes.txt", type: "text/plain" },
+      { name: "archive.zip", type: "application/zip" },
+      { name: "folder", type: "directory" },
+    ];
+
+    const expected = [
+      { name: "movie.mp4", type: "video/mp4" },
+      { name: "notes.txt", type: "text/plain" },
+      { name: "picture.jpg", type: "image/jpeg" },
+      { name: "folder", type: "directory" },
+      { name: "song.mp3", type: "audio/mpeg" },
+      { name: "archive.zip", type: "application/zip" },
+    ];
+
+    expect(sortedItems(input, "type", false)).toEqual(expected);
+  });
+
 });

@@ -17,6 +17,7 @@
   }
 
   .list .listing-item .text .name,
+  .list .listing-item .text .type,
   .list .listing-item .text .modified,
   .list .listing-item .text .size,
   .list .listing-item .text .duration {
