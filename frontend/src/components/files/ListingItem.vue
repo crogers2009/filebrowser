@@ -48,6 +48,7 @@
 
     <div class="text">
       <p class="name">{{ displayName }}</p>
+      <p class="type">{{ fileTypeLabel }}</p>
       <p
         class="size"
         :data-order="humanSize"
@@ -119,6 +120,7 @@
 
     <div class="text">
       <p class="name">{{ displayName }}</p>
+      <p class="type">{{ fileTypeLabel }}</p>
       <p
         class="size"
         :data-order="humanSize"
@@ -144,6 +146,7 @@ import { state, getters, mutations } from "@/store"; // Import your custom store
 import { url } from "@/utils";
 import { notify } from "@/notify";
 import Icon from "@/components/files/Icon.vue";
+import { getTypeInfo } from "@/utils/mimetype";
 
 export default {
   name: "item",
@@ -346,6 +349,28 @@ export default {
         return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
       }
       return `${minutes}:${secs.toString().padStart(2, '0')}`;
+    },
+    fileTypeLabel() {
+      const typeInfo = getTypeInfo(this.type || "");
+      const simpleType = typeInfo.simpleType;
+      const labels = {
+        directory: this.$t("fileTypes.directory"),
+        video: this.$t("fileTypes.video"),
+        image: this.$t("fileTypes.image"),
+        audio: this.$t("fileTypes.audio"),
+        archive: this.$t("fileTypes.archive"),
+        document: this.$t("fileTypes.document"),
+        text: this.$t("fileTypes.document"),
+        binary: this.$t("fileTypes.binary"),
+      };
+
+      if (labels[simpleType]) {
+        return labels[simpleType];
+      }
+      if (this.type && typeof this.type === "string") {
+        return this.type;
+      }
+      return this.$t("fileTypes.other");
     },
   },
   mounted() {

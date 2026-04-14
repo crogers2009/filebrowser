@@ -14,6 +14,12 @@
     </p>
 
     <p
+      class="type"
+    >
+      <span>{{ $t("general.type", { suffix: "" }) }}</span>
+    </p>
+
+    <p
       :class="{ active: sizeSorted }"
       class="size"
       role="button"
@@ -193,10 +199,21 @@ span {
   flex: 0;
 }
 
+.desktop-view .type {
+  min-width: 12%;
+  flex: 0;
+}
+
 .desktop-view .size,
 .desktop-view .duration {
   min-width: 10%;
   flex: 0;
+}
+
+.type {
+  text-align: start;
+  justify-content: flex-start;
+  padding-right: 1em;
 }
 
 .size,

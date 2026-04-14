@@ -557,8 +557,15 @@ export default {
         return;
       }
 
-      // If we're in plyr, don't handle arrow keys to use fast-forward/rewind shortcuts, even if the media is paused.
-      if (this.isMediaFile) {
+      const { key, ctrlKey, metaKey, shiftKey } = event;
+      const isModifiedArrowNavigation =
+        shiftKey &&
+        (ctrlKey || metaKey) &&
+        (key === "ArrowLeft" || key === "ArrowRight");
+
+      // In media players, keep native arrow key behavior (seek/volume) and
+      // only navigate files when a modifier shortcut is used.
+      if (this.isMediaFile && !isModifiedArrowNavigation) {
         return;
       }
       // If we're in the editor, don't handle arrow keys to avoid change of file mistakenly.
@@ -566,8 +573,6 @@ export default {
       if (blockedViews.includes(this.currentView)) {
         return;
       }
-
-      const { key } = event;
 
       switch (key) {
         case "ArrowRight":

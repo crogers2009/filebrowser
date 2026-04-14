@@ -62,6 +62,7 @@ body.rtl .listing-items {
 }
 
 .listing-item .size,
+.listing-item .type,
 .listing-item .modified,
 .listing-item .duration {
   font-size: 0.9em;
@@ -276,6 +277,19 @@ body.rtl .listing-items {
   padding-right: 1em;
 }
 
+.listing-item .type {
+  display: none;
+}
+
+.listing-items.list .listing-item .type,
+.listing-items.compact .listing-item .type {
+  display: block;
+  min-width: 12%;
+  flex: 0;
+  text-align: start;
+  padding-right: 1em;
+}
+
 .listing-items.list .listing-item .size,
 .listing-items.compact .listing-item .size,
 .listing-items.list .listing-item .duration,
@@ -339,9 +353,11 @@ body.rtl .listing-items {
 }
 
 .listing-items.gallery .listing-item .size,
+.listing-items.gallery .listing-item .type,
 .listing-items.gallery .listing-item .modified,
 .listing-items.gallery .listing-item .duration,
 .listing-items.icons .listing-item .size,
+.listing-items.icons .listing-item .type,
 .listing-items.icons .listing-item .modified,
 .listing-items.icons .listing-item .duration {
   display: none !important;
