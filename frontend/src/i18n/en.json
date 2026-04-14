@@ -191,6 +191,7 @@
     "multipleSelectionEnabled": "Multiple selection enabled",
     "sortByLastModified": "Sort by last modified",
     "sortByName": "Sort by name",
+    "sortByType": "Sort by type",
     "sortBySize": "Sort by size",
     "sortByDuration": "Sort by duration",
     "noPreview": "Preview is not available for this file.",

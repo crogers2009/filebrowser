@@ -14,9 +14,16 @@
     </p>
 
     <p
+      :class="{ active: typeSorted }"
       class="type"
+      role="button"
+      tabindex="0"
+      @click="sort('type')"
+      :title="$t('general.type')"
+      :aria-label="$t('general.type')"
     >
       <span>{{ $t("general.type", { suffix: "" }) }}</span>
+      <i v-if="typeSorted" class="material-symbols">{{ typeIcon }}</i>
     </p>
 
     <p
@@ -86,6 +93,9 @@ export default {
     sizeSorted() {
       return getters.sorting().by === "size";
     },
+    typeSorted() {
+      return getters.sorting().by === "type";
+    },
     modifiedSorted() {
       return getters.sorting().by === "modified";
     },
@@ -106,6 +116,12 @@ export default {
         return "arrow_downward";
       }
       return "arrow_upward";
+    },
+    typeIcon() {
+      if (this.typeSorted && !this.ascOrdered) {
+        return "arrow_upward";
+      }
+      return "arrow_downward";
     },
     modifiedIcon() {
       if (this.modifiedSorted && this.ascOrdered) {
@@ -137,6 +153,7 @@ export default {
       let asc = false;
       if (
         (field === "name" && this.nameIcon === "arrow_upward") ||
+        (field === "type" && this.typeIcon === "arrow_upward") ||
         (field === "size" && this.sizeIcon === "arrow_upward") ||
         (field === "modified" && this.modifiedIcon === "arrow_upward") ||
         (field === "duration" && this.durationIcon === "arrow_upward")
